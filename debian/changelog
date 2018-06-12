@@ -1,0 +1,44 @@
+ros-melodic-lusb (1.0.9-0bionic) bionic; urgency=high
+
+  * Prioritize the local include folder (there were issues with catkin workspace overlays)
+  * Contributors: Kevin Hallenbeck
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Mon, 21 Aug 2017 04:00:00 -0000
+
+ros-melodic-lusb (1.0.8-0bionic) bionic; urgency=high
+
+  * Updated package.xml format to version 2
+  * Add boost as dependency in package.xml
+  * Contributors: Kevin Hallenbeck, P. J. Reed
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Tue, 25 Apr 2017 04:00:00 -0000
+
+ros-melodic-lusb (1.0.7-0bionic) bionic; urgency=high
+
+  * Added option to open a specific device based on location. Previously, only the first device could be opened.
+  * Contributors: Kevin Hallenbeck
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Tue, 24 Jan 2017 05:00:00 -0000
+
+ros-melodic-lusb (1.0.6-0bionic) bionic; urgency=high
+
+  * Added boost system library dependency
+  * Contributors: Kevin Hallenbeck
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Fri, 07 Oct 2016 04:00:00 -0000
+
+ros-melodic-lusb (1.0.5-0bionic) bionic; urgency=high
+
+  * Export boost libraries
+  * Contributors: Kevin Hallenbeck
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Fri, 30 Sep 2016 04:00:00 -0000
+
+ros-melodic-lusb (1.0.4-0bionic) bionic; urgency=high
+
+  * Initial release
+  * Contributors: Kevin Hallenbeck
+
+ -- Dataspeed Inc. <khallenbeck@dataspeedinc.com>  Tue, 27 Sep 2016 04:00:00 -0000
+
+
