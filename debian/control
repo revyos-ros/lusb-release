@@ -1,0 +1,12 @@
+Source: ros-indigo-lusb
+Section: misc
+Priority: extra
+Maintainer: Dataspeed Inc. <khallenbeck@dataspeedinc.com>
+Build-Depends: debhelper (>= 9.0.0), libboost-all-dev, libusb-1.0-0-dev, ros-indigo-catkin
+Homepage: http://dataspeedinc.com
+Standards-Version: 3.9.2
+
+Package: ros-indigo-lusb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libboost-all-dev, libusb-1.0-0
+Description: Library for interfacing to USB devices
