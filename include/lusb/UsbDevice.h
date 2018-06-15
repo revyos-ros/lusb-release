@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2014-2017, Dataspeed Inc.
+ *  Copyright (c) 2014-2018, Dataspeed Inc.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -109,6 +109,7 @@ public:
     };
   };
   static void listDevices(uint16_t vid, uint16_t pid, std::vector<Location> &list);
+  void listDevices(std::vector<Location> &list) const;
 
   void setDevceIds(uint16_t vid, uint16_t pid, uint8_t mi);
   bool open(const Location &location = Location());
