@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2014-2017, Dataspeed Inc.
+ *  Copyright (c) 2014-2018, Dataspeed Inc.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -168,6 +168,11 @@ void UsbDevice::listDevices(uint16_t vid, uint16_t pid, std::vector<Location> &v
   libusb_free_device_list(list, 1);
 
   libusb_exit(ctx);
+}
+
+void UsbDevice::listDevices(std::vector<Location> &vec) const
+{
+  listDevices(vid_, pid_, vec);
 }
 
 bool UsbDevice::open(const Location &location)
