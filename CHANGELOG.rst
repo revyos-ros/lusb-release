@@ -2,6 +2,11 @@
 Changelog for package lusb
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.1.0 (2018-10-17)
+------------------
+* Added support for list of USB IDs (VID and PID)
+* Contributors: Kevin Hallenbeck, Lincoln Lorenz
+
 1.0.10 (2018-06-15)
 -------------------
 * Added function to list devices using the class variables for VID and PID
