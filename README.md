@@ -1,3 +1,26 @@
+## lusb (melodic) - 1.1.0-0
+
+The packages in the `lusb` repository were released into the `melodic` distro by running `/usr/bin/bloom-release lusb --rosdistro melodic --track melodic` on `Thu, 18 Oct 2018 16:39:29 -0000`
+
+The `lusb` package was released.
+
+Version of package(s) in repository `lusb`:
+
+- upstream repository: https://bitbucket.org/dataspeedinc/lusb
+- release repository: https://github.com/DataspeedInc-release/lusb-release.git
+- rosdistro version: `1.0.10-0`
+- old version: `1.0.10-0`
+- new version: `1.1.0-0`
+
+Versions of tools used:
+
+- bloom version: `0.6.7`
+- catkin_pkg version: `0.4.9`
+- rosdep version: `0.12.2`
+- rosdistro version: `0.6.9`
+- vcstools version: `0.1.40`
+
+
 ## lusb (kinetic) - 1.1.0-0
 
 The packages in the `lusb` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release lusb --rosdistro kinetic --track kinetic` on `Thu, 18 Oct 2018 16:34:47 -0000`
