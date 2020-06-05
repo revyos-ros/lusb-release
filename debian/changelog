@@ -1,0 +1,58 @@
+ros-noetic-lusb (1.1.0-1focal) focal; urgency=high
+
+  * Added support for list of USB IDs (VID and PID)
+  * Contributors: Kevin Hallenbeck, Lincoln Lorenz
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Wed, 17 Oct 2018 04:00:00 -0000
+
+ros-noetic-lusb (1.0.10-1focal) focal; urgency=high
+
+  * Added function to list devices using the class variables for VID and PID
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Fri, 15 Jun 2018 04:00:00 -0000
+
+ros-noetic-lusb (1.0.9-1focal) focal; urgency=high
+
+  * Prioritize the local include folder (there were issues with catkin workspace overlays)
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Mon, 21 Aug 2017 04:00:00 -0000
+
+ros-noetic-lusb (1.0.8-1focal) focal; urgency=high
+
+  * Updated package.xml format to version 2
+  * Add boost as dependency in package.xml
+  * Contributors: Kevin Hallenbeck, P. J. Reed
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Tue, 25 Apr 2017 04:00:00 -0000
+
+ros-noetic-lusb (1.0.7-1focal) focal; urgency=high
+
+  * Added option to open a specific device based on location. Previously, only the first device could be opened.
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Tue, 24 Jan 2017 05:00:00 -0000
+
+ros-noetic-lusb (1.0.6-1focal) focal; urgency=high
+
+  * Added boost system library dependency
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Fri, 07 Oct 2016 04:00:00 -0000
+
+ros-noetic-lusb (1.0.5-1focal) focal; urgency=high
+
+  * Export boost libraries
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Fri, 30 Sep 2016 04:00:00 -0000
+
+ros-noetic-lusb (1.0.4-1focal) focal; urgency=high
+
+  * Initial release
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Tue, 27 Sep 2016 04:00:00 -0000
+
+
