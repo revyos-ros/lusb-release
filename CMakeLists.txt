@@ -1,34 +1,40 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(lusb)
 
-find_package(catkin REQUIRED)
-find_package(Boost REQUIRED COMPONENTS thread system)
+# Default to C++17
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
 
-catkin_package(
-  INCLUDE_DIRS include ${Boost_INCLUDE_DIRS}
-  LIBRARIES ${PROJECT_NAME} ${Boost_LIBRARIES}
-)
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-add_library(${PROJECT_NAME}
-  src/UsbDevice.cpp
+find_package(ament_cmake_ros REQUIRED)
+find_package(PkgConfig)
+pkg_check_modules(libusb REQUIRED libusb-1.0)
+
+add_library(${PROJECT_NAME} SHARED
+  "src/UsbDevice.cpp"
+)
+target_include_directories(
+  ${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-  usb-1.0
+  ${libusb_LIBRARIES}
 )
-
-install(TARGETS ${PROJECT_NAME}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+ament_export_targets(${PROJECT_NAME}_targets HAS_LIBRARY_TARGET)
+install(
+  TARGETS ${PROJECT_NAME}
+  EXPORT ${PROJECT_NAME}_targets
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+  INCLUDES DESTINATION include
 )
-
-install(DIRECTORY include/${PROJECT_NAME}/
-        DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+install(DIRECTORY include/
+  DESTINATION include
 )
-
+ament_package()

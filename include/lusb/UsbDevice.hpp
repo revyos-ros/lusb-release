@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2014-2018, Dataspeed Inc.
+ *  Copyright (c) 2014-2021, Dataspeed Inc.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,9 @@
 
 #include <stdexcept>
 #include <string>
-#include <boost/function.hpp>
-#include <boost/thread.hpp>
+#include <vector>
+#include <functional>
+#include <thread>
 
 struct libusb_device_handle;
 struct libusb_context;
@@ -64,21 +65,17 @@ public:
   ~UsbDevice();
 
   struct UsbIds {
-    UsbIds() : vid(0), pid(0) {}
-    UsbIds(uint16_t _vid, uint16_t _pid) : vid(_vid), pid(_pid) {}
-    uint16_t vid, pid;
+    UsbIds() {}
+    UsbIds(uint16_t vid, uint16_t pid) : vid(vid), pid(pid) {}
+    uint16_t vid = 0;
+    uint16_t pid = 0;
   };
 
   class Location {
   public:
-    Location() : loc(0) {}
-    Location(uint8_t _bus, uint8_t _port = 0, uint8_t _addr = 0, uint16_t _vid = 0, uint16_t _pid = 0) : loc(0) {
-      bus = _bus;
-      addr = _addr;
-      port = _port;
-      vid = _vid;
-      pid = _pid;
-    }
+    Location() {}
+    Location(uint8_t bus, uint8_t port = 0, uint8_t addr = 0, uint16_t vid = 0, uint16_t pid = 0)
+      : bus(bus), addr(addr), port(port), vid(vid), pid(pid) {}
     static bool match(const Location& a, const Location& b) {
       // Equal to each other or zero
       return !((a.bus  && b.bus  && (a.bus  != b.bus )) ||
@@ -89,35 +86,27 @@ public:
       return match(*this, other);
     }
     bool operator==(const Location& other) const {
-      return loc == other.loc;
+      return bus == other.bus && addr == other.addr && port == other.port;
     }
     bool operator!=(const Location& other) const {
-      return loc != other.loc;
+      return !(*this == other);
     }
     bool operator<(const Location& other) const {
-      return loc < other.loc;
+      return this->get32() < other.get32();
     }
-    bool operator>(const Location& other) const {
-      return loc > other.loc;
+    uint8_t bus = 0;  // Bus number
+    uint8_t addr = 0; // Address, unique for each bus, new on reconnect
+    uint8_t port = 0; // Port on parent hub, not unique for each bus
+    uint16_t vid = 0; // Vendor Id
+    uint16_t pid = 0; // Product Id
+  private:
+    uint32_t get32() const {
+      return ((uint32_t)bus << 16)
+           | ((uint32_t)addr << 8)
+           | ((uint32_t)port << 0);
     }
-    bool operator<=(const Location& other) const {
-      return loc <= other.loc;
-    }
-    bool operator>=(const Location& other) const {
-      return loc >= other.loc;
-    }
-    union { // Zero for don't care
-      uint32_t loc;
-      struct {
-        uint8_t bus;  // Bus number
-        uint8_t addr; // Address, unique for each bus, new on reconnect
-        uint8_t port; // Port on parent hub, not unique for each bus
-        uint8_t :8;
-      };
-    };
-    uint16_t vid; // Vendor Id
-    uint16_t pid; // Product Id
   };
+
   static void listDevices(const std::vector<UsbIds> &ids, std::vector<Location> &list);
   static void listDevices(uint16_t vid, uint16_t pid, std::vector<Location> &list);
   void listDevices(std::vector<Location> &list) const;
@@ -134,10 +123,10 @@ public:
   bool interruptWrite(const void * data, int size, unsigned char endpoint, int timeout);
   int interruptRead(void * data, int size, unsigned char endpoint, int timeout);
 
-  typedef boost::function<void(const void *data, int size)> Callback;
+  typedef std::function<void(const void *data, int size)> Callback;
   void startBulkReadThread(Callback callback, unsigned char endpoint);
   void stopBulkReadThread(unsigned char endpoint);
-  void startinterruptReadThread(Callback callback, unsigned char endpoint);
+  void startInterruptReadThread(Callback callback, unsigned char endpoint);
   void stopInterruptReadThread(unsigned char endpoint);
 
   bool throw_errors_;
@@ -163,9 +152,9 @@ private:
   Location location_;
   libusb_device_handle *libusb_handle_;
   libusb_context *ctx_;
-  boost::thread bulk_threads_[128];
+  std::thread bulk_threads_[128];
   bool bulk_threads_enable_[128];
-  boost::thread interrupt_threads_[128];
+  std::thread interrupt_threads_[128];
   bool interrupt_threads_enable_[128];
 
 };

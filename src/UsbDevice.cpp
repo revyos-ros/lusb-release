@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2014-2018, Dataspeed Inc.
+ *  Copyright (c) 2014-2021, Dataspeed Inc.
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -32,8 +32,10 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-#include "lusb/UsbDevice.h"
+#include "lusb/UsbDevice.hpp"
+
 #include <libusb-1.0/libusb.h>
+#include <cstring>
 
 using namespace std;
 
@@ -99,7 +101,11 @@ void UsbDevice::setDebugLevel(uint8_t level)
   if (level > LIBUSB_LOG_LEVEL_DEBUG) {
     level = LIBUSB_LOG_LEVEL_DEBUG;
   }
+#if LIBUSB_API_VERSION >= 0x01000107
+  libusb_set_option(ctx_, LIBUSB_OPTION_LOG_LEVEL, level);
+#else
   libusb_set_debug(ctx_, level);
+#endif
 }
 
 void UsbDevice::init()
@@ -108,11 +114,15 @@ void UsbDevice::init()
   location_ = Location();
   libusb_handle_ = NULL;
   throw_errors_ = false;
-  memset(bulk_threads_enable_, 0x00, sizeof(bulk_threads_enable_));
-  memset(interrupt_threads_enable_, 0x00, sizeof(interrupt_threads_enable_));
+  std::memset(bulk_threads_enable_, 0x00, sizeof(bulk_threads_enable_));
+  std::memset(interrupt_threads_enable_, 0x00, sizeof(interrupt_threads_enable_));
   ctx_ = NULL;
   libusb_init(&ctx_);
+#if LIBUSB_API_VERSION >= 0x01000107
+  libusb_set_option(ctx_, LIBUSB_OPTION_LOG_LEVEL, LIBUSB_LOG_LEVEL_NONE);
+#else
   libusb_set_debug(ctx_, LIBUSB_LOG_LEVEL_NONE);
+#endif
 }
 
 UsbDevice::UsbDevice(uint16_t vid, uint16_t pid, uint8_t mi)
@@ -158,7 +168,11 @@ void UsbDevice::listDevices(const std::vector<UsbIds> &ids, std::vector<Location
 
   libusb_context *ctx = NULL;
   libusb_init(&ctx);
+#if LIBUSB_API_VERSION >= 0x01000107
+  libusb_set_option(ctx, LIBUSB_OPTION_LOG_LEVEL, LIBUSB_LOG_LEVEL_NONE);
+#else
   libusb_set_debug(ctx, LIBUSB_LOG_LEVEL_NONE);
+#endif
 
   libusb_device **list;
   ssize_t cnt = libusb_get_device_list(ctx, &list);
@@ -340,7 +354,7 @@ void UsbDevice::startBulkReadThread(Callback callback, unsigned char endpoint)
   endpoint &= 0x7F;
   stopBulkReadThread(endpoint);
   bulk_threads_enable_[endpoint] = true;
-  bulk_threads_[endpoint] = boost::thread(&UsbDevice::bulkReadThread, this, callback, endpoint);
+  bulk_threads_[endpoint] = std::thread(&UsbDevice::bulkReadThread, this, callback, endpoint);
 }
 void UsbDevice::stopInterruptReadThread(unsigned char endpoint)
 {
@@ -351,12 +365,12 @@ void UsbDevice::stopInterruptReadThread(unsigned char endpoint)
     interrupt_threads_[endpoint].join();
   }
 }
-void UsbDevice::startinterruptReadThread(Callback callback, unsigned char endpoint)
+void UsbDevice::startInterruptReadThread(Callback callback, unsigned char endpoint)
 {
   endpoint &= 0x7F;
   stopBulkReadThread(endpoint);
   interrupt_threads_enable_[endpoint] = true;
-  interrupt_threads_[endpoint] = boost::thread(&UsbDevice::interruptReadThread, this, callback, endpoint);
+  interrupt_threads_[endpoint] = std::thread(&UsbDevice::interruptReadThread, this, callback, endpoint);
 }
 
 } //namespace lusb
