@@ -1,9 +1,0 @@
-ros-foxy-lusb (2.0.0-1focal) focal; urgency=high
-
-  * Initial ROS2 release
-  * Use std instead of boost
-  * Contributors: Kevin Hallenbeck
-
- -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Fri, 29 Oct 2021 04:00:00 -0000
-
-
