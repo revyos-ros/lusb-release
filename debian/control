@@ -1,0 +1,12 @@
+Source: ros-foxy-lusb
+Section: misc
+Priority: optional
+Maintainer: Kevin Hallenbeck <khallenbeck@dataspeedinc.com>
+Build-Depends: debhelper (>= 9.0.0), libusb-1.0-0-dev, pkg-config, ros-foxy-ament-cmake, ros-foxy-ros-workspace
+Homepage: http://dataspeedinc.com
+Standards-Version: 3.9.2
+
+Package: ros-foxy-lusb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libusb-1.0-0-dev, ros-foxy-ros-workspace
+Description: Library for interfacing to USB devices
