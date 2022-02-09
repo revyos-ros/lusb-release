@@ -1,3 +1,26 @@
+## lusb (foxy) - 2.0.1-1
+
+The packages in the `lusb` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy lusb` on `Wed, 09 Feb 2022 19:09:54 -0000`
+
+The `lusb` package was released.
+
+Version of package(s) in repository `lusb`:
+
+- upstream repository: https://bitbucket.org/dataspeedinc/lusb
+- release repository: https://github.com/DataspeedInc-release/lusb-release.git
+- rosdistro version: `2.0.0-1`
+- old version: `2.0.0-1`
+- new version: `2.0.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## lusb (foxy) - 2.0.0-1
 
 The packages in the `lusb` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --rosdistro foxy --track foxy lusb --edit` on `Mon, 07 Feb 2022 16:41:09 -0000`
