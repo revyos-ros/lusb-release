@@ -1,3 +1,26 @@
+## lusb (humble) - 2.0.2-1
+
+The packages in the `lusb` repository were released into the `humble` distro by running `/usr/bin/bloom-release lusb --rosdistro humble` on `Thu, 25 Jul 2024 17:59:16 -0000`
+
+The `lusb` package was released.
+
+Version of package(s) in repository `lusb`:
+
+- upstream repository: https://bitbucket.org/dataspeedinc/lusb
+- release repository: https://github.com/DataspeedInc-release/lusb-release.git
+- rosdistro version: `2.0.1-1`
+- old version: `2.0.1-1`
+- new version: `2.0.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.24.0`
+- rosdistro version: `0.9.1`
+- vcstools version: `0.1.42`
+
+
 ## lusb (humble) - 2.0.1-1
 
 The packages in the `lusb` repository were released into the `humble` distro by running `/usr/bin/bloom-release lusb --rosdistro humble` on `Thu, 01 Dec 2022 22:42:08 -0000`
