@@ -35,7 +35,7 @@
 #include "lusb/UsbDevice.hpp"
 
 #include <libusb-1.0/libusb.h>
-#include <cstring>
+#include <string.h>
 
 using namespace std;
 
@@ -114,8 +114,8 @@ void UsbDevice::init()
   location_ = Location();
   libusb_handle_ = NULL;
   throw_errors_ = false;
-  std::memset(bulk_threads_enable_, 0x00, sizeof(bulk_threads_enable_));
-  std::memset(interrupt_threads_enable_, 0x00, sizeof(interrupt_threads_enable_));
+  memset(bulk_threads_enable_, 0x00, sizeof(bulk_threads_enable_));
+  memset(interrupt_threads_enable_, 0x00, sizeof(interrupt_threads_enable_));
   ctx_ = NULL;
   libusb_init(&ctx_);
 #if LIBUSB_API_VERSION >= 0x01000107
