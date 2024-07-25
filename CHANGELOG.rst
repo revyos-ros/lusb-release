@@ -2,6 +2,11 @@
 Changelog for package lusb
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.2 (2024-06-13)
+------------------
+* Fix include
+* Contributors: Kevin Hallenbeck
+
 2.0.1 (2022-02-09)
 ------------------
 * Add README and example

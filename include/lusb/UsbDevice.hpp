@@ -40,6 +40,7 @@
 #include <vector>
 #include <functional>
 #include <thread>
+#include <stdint.h>
 
 struct libusb_device_handle;
 struct libusb_context;
