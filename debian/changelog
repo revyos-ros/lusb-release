@@ -1,0 +1,25 @@
+ros-humble-lusb (2.0.2-1bookworm) bookworm; urgency=high
+
+  * Fix include
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Wed, 12 Jun 2024 16:00:00 -0000
+
+ros-humble-lusb (2.0.1-1bookworm) bookworm; urgency=high
+
+  * Add README and example
+  * Fix cmake problems and update for best practices
+  * Add pkg-config build dependency
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Tue, 08 Feb 2022 16:00:00 -0000
+
+ros-humble-lusb (2.0.0-1bookworm) bookworm; urgency=high
+
+  * Initial ROS2 release
+  * Use std instead of boost
+  * Contributors: Kevin Hallenbeck
+
+ -- Kevin Hallenbeck <khallenbeck@dataspeedinc.com>  Thu, 28 Oct 2021 16:00:00 -0000
+
+
